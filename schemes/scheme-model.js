@@ -6,7 +6,8 @@ module.exports = {
   add,
   update,
   remove,
-  findSteps
+  findSteps,
+  addStep
 };
 
 function find() {
@@ -47,6 +48,8 @@ function remove(id) {
     .del();
 }
 
-function addById(id) {
-  return db("steps").where({ id }).first;
+function addStep(step, id) {
+  return db("steps")
+    .insert(step)
+    .then(ids => ({ id: ids[0] }));
 }
